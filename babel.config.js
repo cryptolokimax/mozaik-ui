@@ -1,0 +1,4 @@
+{
+    "presets": ["@mozaik/babel-preset"]
+}
+  

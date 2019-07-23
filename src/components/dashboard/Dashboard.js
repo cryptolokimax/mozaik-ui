@@ -5,13 +5,6 @@ import { TransitionMotion, spring } from 'react-motion'
 import styled from 'styled-components'
 import Widget from '../../containers/WidgetContainer'
 
-const Wrapper = styled.div`
-    position: absolute;
-    top: calc(1.2vmin / 2 + ${props => props.theme.dashboard.header.height});
-    right: calc(1.2vmin / 2);
-    bottom: calc(1.2vmin / 2);
-    left: calc(1.2vmin / 2);
-`
 
 export const DashboardPropType = PropTypes.shape({
     columns: PropTypes.number.isRequired,
@@ -42,6 +35,19 @@ const widgetWillLeave = () => ({
 
 const ignoreProps = ['x', 'y', 'top', 'left', 'columns', 'rows', 'width', 'height']
 
+
+const WrapperDesktop = styled.div`
+    position: absolute;
+    top: calc(1.2vmin / 2 + ${props => props.theme.dashboard.header.height});
+    right: calc(1.2vmin / 2);
+    bottom: calc(1.2vmin / 2);
+    left: calc(1.2vmin / 2);
+`
+
+const WrapperMobile = styled.div`
+    padding-top: 7.2vmin;
+`
+
 export default class Dashboard extends Component {
     static propTypes = {
         dashboard: DashboardPropType.isRequired,
@@ -56,10 +62,15 @@ export default class Dashboard extends Component {
             dashboard: { columns, rows, widgets: _widgets },
             dashboardIndex,
             registry,
+            isMobile,
         } = this.props
 
         const widgets = _widgets.map(w => {
-            return {
+            return isMobile ? {
+                ...w,
+                key: `dashboard${dashboardIndex}.x${w.x}.y${w.y}`,
+                height: `${(w.rows / rows) * 130}vw`,
+            } : {
                 ...w,
                 key: `dashboard${dashboardIndex}.x${w.x}.y${w.y}`,
                 width: `${(w.columns / columns) * 100}%`,
@@ -69,6 +80,8 @@ export default class Dashboard extends Component {
             }
         })
 
+        const Wrapper = isMobile ? WrapperMobile : WrapperDesktop;
+        
         return (
             <TransitionMotion
                 willEnter={widgetWillEnter}
@@ -96,7 +109,9 @@ export default class Dashboard extends Component {
                             return (
                                 <div
                                     key={key}
-                                    style={{
+                                    style={isMobile ? {
+                                        height: data.height,
+                                    } : {
                                         transformOrigin: '0 50%',
                                         position: 'absolute',
                                         width: data.width,

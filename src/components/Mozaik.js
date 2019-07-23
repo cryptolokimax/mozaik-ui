@@ -4,9 +4,11 @@ import styled, { injectGlobal } from 'styled-components'
 
 import Dashboard, { DashboardPropType } from './dashboard/Dashboard'
 import DashboardHeader from './dashboard/DashboardHeader'
+import DashboardTitle from './dashboard/DashboardTitle'
 import WidgetsRegistry from './../WidgetsRegistry'
 import Settings from './settings/Settings'
 import Notifications from '../containers/NotificationsContainer'
+import typography from '../theming/typography'
 
 injectGlobal`
 html,
@@ -14,9 +16,14 @@ body {
     margin: 0;
     height: 100%;
     width:  100%;
-    overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        overflow: hidden;
+    }
 }
 
 *,
@@ -43,7 +50,15 @@ svg {
 }
 `
 
-const Root = styled.div`
+const TitleWrapper = styled.div`
+    flex-grow: 1;
+    margin-right: 4vmin;
+    padding-left: 1.9vmin;
+    height: 0vmin;
+    ${props => typography(props.theme, 'display')};
+`
+
+const RootDesktop = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
@@ -54,6 +69,22 @@ const Root = styled.div`
     color: ${props => props.theme.colors.text};
     ${props => props.theme.root.extend.trim()};
 `
+const RootMobile = styled.div`
+    width: 100%;
+    background: ${props => props.theme.root.background};
+    color: ${props => props.theme.colors.text};
+    ${props => props.theme.root.extend.trim()};
+`
+
+
+const getIsMobile = function() {
+    if (window.innerWidth < 1200) {
+        return true;
+    } else {
+        return false;
+    }
+  };
+
 
 export default class Mozaik extends Component {
     static propTypes = {
@@ -110,11 +141,20 @@ export default class Mozaik extends Component {
         document.addEventListener("keydown", this.onKeyDown)
     }
 
+    componentDidUpdate() {
+        window.onresize = function () {
+            this.forceUpdate();
+          }.bind(this);
+    }
+
     componentWillUnmount() {
         document.removeEventListener("keydown", this.onKeyDown)
     }
 
     render() {
+
+        const isMobile = getIsMobile();
+
         const {
             isLoading,
             dashboards,
@@ -133,14 +173,31 @@ export default class Mozaik extends Component {
 
         let content = <div>loading</div>
         if (!isLoading && dashboards.length > 0) {
-            content = (
-                <Dashboard
+            console.log(dashboards);
+            content = isMobile ? (
+                <div>
+                {dashboards.map((dshbrd, di) => [
+                    <TitleWrapper key={`${di}-title`}>
+                        <DashboardTitle currentDashboardIndex={di} title={dashboards[di].title} />
+                    </TitleWrapper>,
+                    <Dashboard
+                        key={di}
+                        dashboard={dashboards[di]}
+                        dashboardIndex={di}
+                        registry={WidgetsRegistry}
+                        isMobile={isMobile}
+                    /> 
+                ])}
+                </div>
+            ) : <Dashboard
                     dashboard={dashboards[currentDashboard]}
                     dashboardIndex={currentDashboard}
                     registry={WidgetsRegistry}
-                />
-            )
+                    isMobile={isMobile}
+                /> 
         }
+
+        const Root = isMobile ? RootMobile : RootDesktop;
 
         return (
             <Root>
@@ -154,7 +211,8 @@ export default class Mozaik extends Component {
                     pause={pause}
                     previous={previous}
                     next={next}
-                />
+                    isMobile={isMobile}
+                />  
                 {content}
                 <Settings
                     themes={themes}

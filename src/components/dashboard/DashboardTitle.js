@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import LokiLogo from "./LokiLogo";
 import { TransitionMotion, spring } from 'react-motion'
 import styled from 'styled-components'
 
@@ -60,6 +61,7 @@ export default class DashboardTitle extends Component {
                                         opacity: style.opacity,
                                     }}
                                 >
+                                    <LokiLogo />
                                     {data}
                                 </Title>
                             )
