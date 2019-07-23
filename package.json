@@ -1,7 +1,7 @@
 {
   "name": "@mozaik/ui",
   "description": "Mozaïk UI - Loki version",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "styled-components": "^2.1.1"
   },
   "peerDependencies": {
-    "react": "^16.4.0"
+    "react": "^16.8.6"
   },
   "devDependencies": {
     "@mozaik/babel-preset": "^1.0.0-alpha.6",
@@ -41,8 +41,8 @@
     "babel-jest": "^20.0.3",
     "cross-env": "^5.0.1",
     "jest": "^20.0.4",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "scripts": {
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",

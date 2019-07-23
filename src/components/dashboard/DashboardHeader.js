@@ -79,7 +79,7 @@ class DashboardHeader extends Component {
     return (
       <Header>
         {!isMobile && [
-          <TitleWrapper>
+          <TitleWrapper key="title-wrapper">
             <DashboardTitle
               currentDashboardIndex={currentDashboardIndex}
               title={title}
@@ -87,6 +87,7 @@ class DashboardHeader extends Component {
           </TitleWrapper>,
           dashboards.length && dashboards.length > 1 && (
             <DashboardPlayer
+              key="dashboard-player"
               dashboards={dashboards}
               currentDashboardIndex={currentDashboardIndex}
               isPlaying={isPlaying}
