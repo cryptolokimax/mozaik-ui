@@ -10,7 +10,7 @@ export default function dashboards(
     dashboards: [],
     current: (() => {
       const predefinedDashboard = parseInt(
-        window.location.pathname.replace("/", ""),
+        window.location.hash.replace("#", ""),
         10
       );
       if (predefinedDashboard > 0 && predefinedDashboard <= 10) {

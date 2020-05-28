@@ -54,6 +54,21 @@ export const setDashboards = (dashboards) => {
     });
 
     dispatch({ type: SET_DASHBOARDS, dashboards });
+
+    window.addEventListener(
+      "hashchange",
+      function locationHashChanged() {
+        console.log("HASH CHANGED");
+        const predefinedDashboard = parseInt(
+          window.location.hash.replace("#", ""),
+          10
+        );
+        if (predefinedDashboard > 0 && predefinedDashboard <= 10) {
+          dispatch(setCurrentDashboard(predefinedDashboard - 1));
+        }
+      },
+      false
+    );
   };
 };
 
@@ -63,7 +78,7 @@ const setCurrentDashboard = (index) => {
       id: "dashboard",
     },
     "",
-    window.location.origin + "/" + (index + 1)
+    window.location.origin + "/#" + (index + 1)
   );
 
   return {
