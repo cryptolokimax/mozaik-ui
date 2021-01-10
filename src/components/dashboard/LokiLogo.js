@@ -1,63 +1,35 @@
-import React from 'react'
+import React from "react";
 
-const SvgComponent = props => (
+const SvgComponent = (props) => (
   <svg
+    xmlns="http://www.w3.org/2000/svg"
     style={{
-      isolation: 'isolate',
-      marginRight: '10px'
+      isolation: "isolate",
     }}
-    viewBox="0 0 640 640"
+    viewBox="0 0 500 500"
     width="44px"
     height="44px"
     {...props}
   >
     <defs>
       <clipPath id="prefix__a">
-        <path d="M0 0h640v640H0z" />
+        <path d="M0 0h500v500H0z" />
       </clipPath>
     </defs>
-    <g
-      style={{
-        isolation: 'isolate',
-      }}
-      clipPath="url(#prefix__a)"
-    >
-      <linearGradient
-        id="prefix__b"
-        x1={0.5}
-        y1={0}
-        x2={0.5}
-        y2={1}
-        gradientTransform="matrix(281 0 0 435 78 24)"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop offset="0%" stopColor="#fff" />
-        <stop offset="0%" stopColor="#016465" />
-        <stop offset="97.826%" stopColor="#69b447" />
-      </linearGradient>
-      <path
-        d="M298 24l61 57-161 161 153 158-60 59L78 243 298 24z"
-        fill="url(#prefix__b)"
+    <g clipPath="url(#prefix__a)">
+      <circle
+        vectorEffect="non-scaling-stroke"
+        cx={250}
+        cy={250}
+        r={250}
+        fill="#161D3E"
       />
-      <linearGradient
-        id="prefix__c"
-        x1={0.5}
-        y1={0}
-        x2={0.5}
-        y2={1}
-        gradientTransform="matrix(279 0 0 434 283 183)"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop offset="0%" stopColor="#fff" />
-        <stop offset="0%" stopColor="#016465" />
-        <stop offset="97.826%" stopColor="#69b447" />
-      </linearGradient>
       <path
-        d="M289 241l157 154-163 164 57 58 222-221-212-213-61 58z"
-        fill="url(#prefix__c)"
+        d="M105.235 121.153l295.366-1.768-297.134 261.761 298.903-.884-297.135-259.109z"
+        fill="#15C5BA"
       />
     </g>
   </svg>
-)
+);
 
-export default SvgComponent
+export default SvgComponent;
