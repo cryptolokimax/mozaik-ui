@@ -5,6 +5,7 @@ const SvgComponent = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     style={{
       isolation: "isolate",
+      marginRight: "1.5vmin",
     }}
     viewBox="0 0 500 500"
     width="44px"
