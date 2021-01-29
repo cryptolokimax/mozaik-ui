@@ -26,33 +26,14 @@ body {
     }
 }
 
-@media screen and (max-width: 525px) {
-    .Dashboard__Title {
-        top: 9px !important;
-    }
-}
-
-@media screen and (mix-width: 525px) and (max-width: 680px) {
-    .Dashboard__Title {
-        top: 6px !important;
-    }
-}
-
-@media screen and (mix-width: 680px) and (max-width: 800px) {
-    .Dashboard__Title {
-        top: 10px !important;
-    }
-}
-
-@media screen and (mix-width: 800px) and (max-width: 1200px) {
-    .Dashboard__Title {
-        top: 15px !important;
-    }
-}
 
 @media screen and (max-width: 1200px) {
     body {
         overflow: scroll !important;
+    }
+    .Dashboard__Title {
+        top: 15px !important;
+        height: 22px !important;
     }
 }
 
