@@ -17,18 +17,18 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
-  height: ${props => props.theme.dashboard.header.height};
-  padding: ${props => props.theme.dashboard.header.padding};
-  background: ${props => props.theme.dashboard.header.background};
-  color: ${props => props.theme.dashboard.header.color};
-  box-shadow: ${props => props.theme.dashboard.header.boxShadow};
+  height: ${(props) => props.theme.dashboard.header.height};
+  padding: ${(props) => props.theme.dashboard.header.padding};
+  background: ${(props) => props.theme.dashboard.header.background};
+  color: ${(props) => props.theme.dashboard.header.color};
+  box-shadow: ${(props) => props.theme.dashboard.header.boxShadow};
 `;
 
 const TitleWrapper = styled.div`
   flex-grow: 1;
   margin-right: 4vmin;
   height: 6vmin;
-  ${props => typography(props.theme, "display")};
+  ${(props) => typography(props.theme, "display")};
 `;
 
 const Toogle = styled.div`
@@ -50,7 +50,7 @@ class DashboardHeader extends Component {
     previous: PropTypes.func.isRequired,
     next: PropTypes.func.isRequired,
     pause: PropTypes.func.isRequired,
-    theme: PropTypes.object.isRequired
+    theme: PropTypes.object.isRequired,
   };
 
   render() {
@@ -65,7 +65,7 @@ class DashboardHeader extends Component {
       settingsOpened,
       toggleSettings,
       theme,
-      isMobile
+      isMobile,
     } = this.props;
 
     let title = "Mozaïk";
@@ -96,10 +96,14 @@ class DashboardHeader extends Component {
               previous={previous}
               next={next}
             />
-          )
+          ),
         ]}
 
-        <Toogle onClick={toggleSettings} className="Dashboard__Header__Toggle" style={{position: 'absolute', right: '20px'}}>
+        <Toogle
+          onClick={toggleSettings}
+          className="Dashboard__Header__Toggle"
+          style={{ position: "absolute", right: "20px" }}
+        >
           <NavButton
             direction="down"
             opened={settingsOpened}
